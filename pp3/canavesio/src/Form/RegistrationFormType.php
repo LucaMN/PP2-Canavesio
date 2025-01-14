@@ -34,9 +34,9 @@ class RegistrationFormType extends AbstractType
                 'maxlength' => '255'
             ],
             'constraints' => [
-                new NotBlank([
+                 new NotBlank([
                     'message' => 'Por favor, introduce un email',
-                ]),
+                ]), 
                 new Email([
                     'message' => 'El email "{{ value }}" no es válido.',
                 ]),
@@ -71,8 +71,8 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Regex([
                         'pattern' => '/^[a-zA-Z0-9]+$/',
-                        'message' => 'El nombre de usuario solo puede contener letras y números'
-                    ])
+                        'message' => 'El nombre de usuario no  puede contener caracteres especiales'
+                    ]) 
                 ]
             ])
             ->add('phone', TelType::class, [
@@ -88,18 +88,27 @@ class RegistrationFormType extends AbstractType
                     '¿Cuál fue su primer trabajo?' => 'primer_trabajo',
                 ],
                 'placeholder' => 'Seleccione una pregunta',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Por favor, seleccione una pregunta',
+                    ]),
+                    ]
             ])
             ->add('securityAnswer', TextType::class, [
                 'label' => 'Respuesta a la pregunta clave',
                 'required' => true,
                 'attr' => ['placeholder' => 'Escriba su respuesta'],
-            ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
                 'constraints' => [
-                    new IsTrue([
-                        'message' => 'Debe aceptar nuestros términos.',
+                    new NotBlank([
+                        'message' => 'Por favor, introduzca una respuesta',
                     ]),
+                    new Length([
+                        'min' => 6,
+                        'max' => 20,
+                        'minMessage' => 'Su respuesta debe tener al menos {{ limit }} caracteres',
+                        'maxMessage' => 'La respuesta no puede superar los {{ limit }} caracteres',
+                        'normalizer' => 'trim'
+                    ]), 
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [

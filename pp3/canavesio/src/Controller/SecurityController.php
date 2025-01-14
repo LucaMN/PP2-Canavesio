@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,6 +17,11 @@ class SecurityController extends AbstractController
 
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+        if ($error) {
+            $customErrorMessage = 'Las credenciales son incorrectas. Por favor verifica tu correo electrónico y contraseña.';
+        } else {
+            $customErrorMessage = null;
+        }
 
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,

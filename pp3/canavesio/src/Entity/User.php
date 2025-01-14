@@ -37,10 +37,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255, unique: true)]
     #[Assert\NotBlank(message: 'El nombre de usuario no puede estar vacío')]
     #[Assert\Type(type: 'string', message: 'El nombre de usuario debe ser texto')]
-    #[Assert\Regex(
-        pattern: '/^[a-zA-Z0-9]+$/',
-        message: 'El nombre de usuario solo puede contener letras y números'
-    )]
     private ?string $username = null;
 
     #[ORM\Column(type: 'string', length: 15, nullable: true)]
