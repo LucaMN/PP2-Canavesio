@@ -11,6 +11,8 @@
 
             {{ form_errors(registrationForm) }}
 
+            {{ form_start(registrationForm) }}
+
             {{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
                 <div class="register-field">
                     {{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'register-label'}}) }}
@@ -20,6 +22,9 @@
                             'placeholder': 'Email'
                         }
                     }) }}
+
+                </div>
+
                     {{ form_errors(registrationForm.email) }}
                 </div>
                 <div class="register-field" >
@@ -52,6 +57,7 @@
                             'placeholder': 'Contraseña'
                         }
                     }) }}
+
                     {{ form_errors(registrationForm.plainPassword) }}
                 </div>
                 <div class="register-field" >
@@ -104,6 +110,7 @@
         easing: 'ease-out-cubic'
     });
 });
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const passwordField = document.querySelector('[name="registration_form[plainPassword]"]');
